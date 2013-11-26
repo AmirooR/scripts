@@ -1,0 +1,44 @@
+#! /usr/bin/perl
+use strict;
+#my $ghol = "*.pl";
+#system("ls ".$ghol);
+#print "ARGV is @ARGV \n";
+if( @ARGV >= 2)
+{
+	my @files = <*>;
+	my $ext1 = $ARGV[0];
+	my $ext2 = $ARGV[1];
+	if( @ARGV >= 3)
+	{
+		#@files = glob("$ARGV[0]/*");
+		@files = @ARGV[0..$#ARGV];
+		$ext1 = $ARGV[$#ARGV-1];
+		$ext2 = $ARGV[$#ARGV];
+	}
+	
+	foreach my $file (@files)
+	{
+		#print "$file\n";
+		my $reg1 = ".".$ext1."\$";
+		my $reg2 = ".".$ext2;
+		#print "reg1 is ",$reg1,"\n";
+		if( -f $file && ($file =~ /$reg1/))
+		{
+			my $chFile = $file;
+			$chFile =~ s/$reg1/$reg2/;
+			print $chFile,"\n";
+			system("mv ".$file." ".$chFile);
+		}
+		else
+		{
+			;#	print "$file\n"; 
+		}
+	}
+}
+else
+{
+	print "error, \n\t(1) chExt ext1 ext2 changes all files \n
+		\t\twith ext1 extension to ext2 extension\n
+		\n\t(2) chExt regExp ext1 ext2\n";
+}
+
