@@ -1,4 +1,5 @@
 from xattr import xattr
+from struct import unpack
 
 def set_label(filename, color_name):
     colors = ['none', 'gray', 'green', 'purple', 'blue', 'yellow', 'red', 'orange']
